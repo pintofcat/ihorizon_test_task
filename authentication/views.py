@@ -1,7 +1,7 @@
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
 
 from . import forms
 
@@ -19,7 +19,7 @@ class RegisterView(FormView):
 class LoginView(FormView):
     template_name = "auth/login.html"
     form_class = forms.LoginForm
-    success_url = reverse_lazy("supportdesk_placeholder")
+    success_url = reverse_lazy("list_tickets")
 
     def form_valid(self, form):
         username = form.cleaned_data.get("username")

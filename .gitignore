@@ -398,3 +398,4 @@ staticfiles/
 .vscode
 
 **/__pycache__/
+.idea/

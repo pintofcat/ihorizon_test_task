@@ -11,9 +11,19 @@
     <link rel="preload" as="font" href="{% static 'assets/fonts/Inter-UI.var.woff2' %}" type="font/woff2" crossorigin="anonymous">
   </head>
 
-  <body>
 </head>
 <body>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/custom.css' %}">
+
+<nav class="nav navbar-nav">
+{% if group == "customer" %}
+<div class="btn-toolbar">
+    <h1 class="mb-1 ml-7 pl-6">Ihorizon</h1>
+    <a href="/supportdesk/tickets" class="btn btn-outline-primary mr-2 mb-2 ml-auto" role="button">My requests</a>
+    <a href="/supportdesk/tickets/new" class="btn btn-primary float-right mr-2 mb-2 mr-auto" role="button">+ New request</a>
+</div>
+    </nav>
+{% endif %}
     {% block content %}
     {% endblock %}
 </body>

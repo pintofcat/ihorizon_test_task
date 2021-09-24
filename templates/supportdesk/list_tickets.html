@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+
+{% if group == "customer" %}
+<h3 class="mb-1 mt-5">My requests</h3>
+{% else %}
+<h3 class="mb-1 mt-5">All requests</h3>
+{% endif %}
+<div class="row">
+    {% for ticket in tickets %}
+    <div class="col-12">
+        <div class="border border-secondary g-mb-30 media-comment">
+            <div class="u-shadow-v18 g-bg-secondary g-pa-30">
+              <div class="g-mb-auto">
+              <a href="/supportdesk/tickets/{{ ticket.id }}">
+                <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ ticket.summary}}</h5>
+              </a>
+                <span class="g-color-gray-dark-v4 g-font-size-12">{{ ticket.creator.username }} </span>
+                <span class="badge badge-danger">{% if ticket.high_priority %}High priority{% endif %}</span>
+                {% if ticket.status == "IN_PROGRESS" %}
+                <span class="badge badge-info float-right">in progress</span>
+                {% else %}
+                <span class="badge badge-success float-right">completed</span>
+                {% endif %}
+              </div>
+              <p>{{ ticket.description }}</p>
+                <small>Created 3 days ago</small>
+            <small class="float-right"></small>
+            {% if group == 'agent' %}
+            <div class="mt-2">
+            <a href="/supportdesk/tickets/" value="value" class="btn btn-outline-primary mr-2 mb-2 ml-auto btn-sm" role="button">Reassign to someone</a>
+                <form action="/supportdesk/tickets/{{ ticket.id }}/update" method="post">
+                    {% csrf_token %}
+                 <input type="submit" class="btn btn-outline-success mr-2 mb-2 mr-auto btn-sm" value="Mark as completed" name="to_complete">
+                </form>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

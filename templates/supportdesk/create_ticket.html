@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container p-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <p class="h3 mb-2">
+                Request information
+            </p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Create support request</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
